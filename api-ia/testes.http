@@ -1,0 +1,26 @@
+### Estado da API local
+GET http://localhost:3001/saude
+
+### Pergunta respondida pelos documentos
+POST http://localhost:3001/perguntar
+Content-Type: application/json
+
+{
+  "pergunta": "Como registrar meu humor no Entrelinhas?"
+}
+
+### Pergunta fora do assunto
+POST http://localhost:3001/perguntar
+Content-Type: application/json
+
+{
+  "pergunta": "Qual é a data de entrega do TCC?"
+}
+
+### Entrada inválida
+POST http://localhost:3001/perguntar
+Content-Type: application/json
+
+{
+  "pergunta": ""
+}

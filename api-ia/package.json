@@ -1,0 +1,9 @@
+{
+  "name": "entrelinhas-api-ia",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": "22.x" },
+  "scripts": { "dev": "node --env-file-if-exists=.env app.js" },
+  "dependencies": { "express": "^5.1.0" }
+}
