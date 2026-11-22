@@ -1,0 +1,5 @@
+.env
+.env.*
+!.env.exemplo
+node_modules/
+verificar-temporario.mjs
