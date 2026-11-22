@@ -9,6 +9,9 @@
     "ios": {
       "supportsTablet": true
     },
+    "experiments": {
+      "baseUrl": "/App-Entrelinhas"
+    },
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
@@ -22,7 +25,8 @@
     },
     "plugins": [
       "expo-status-bar",
-      "expo-sharing"
+      "expo-sharing",
+      "expo-font"
     ]
   }
 }

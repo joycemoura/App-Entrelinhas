@@ -23,7 +23,14 @@ async function solicitar(rota, { metodo = 'GET', dados, token } = {}) {
       signal: controle.signal,
     });
     resultado = await resposta.json().catch(() => null);
-  } catch {
+  } catch (erro) {
+    console.log('[API] Requisição:', urlApi + rota, erro.message);
+
+    if (rota === '/auth/login') {
+      fetch(`${urlApi}/health`)
+        .then((resposta) => console.log('[API] Health:', resposta.status))
+        .catch((falha) => console.log('[API] Health:', falha.message));
+    }
     if (!controle.signal.aborted) {
       throw new Error('Confira se a API está rodando e se o endereço em mobile/.env está correto.');
     }

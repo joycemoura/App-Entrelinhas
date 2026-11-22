@@ -116,5 +116,3 @@ Consulte o arquivo `ENTRELINHAS_DOCUMENTACAO.md` para mais detalhes.
 ## Projeto acadêmico
 
 Desenvolvido para a disciplina de **Desenvolvimento de Aplicações para Dispositivos Móveis**.
-
-**Universidade Federal do Paraná — UFPR, Setor Palotina.**

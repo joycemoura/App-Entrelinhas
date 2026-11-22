@@ -63,7 +63,32 @@ function erroAoSalvarNaPasta(causa) {
 
 export async function salvarRelatorioPdf({ html, nomeArquivo, podeSalvar, imprimir = false }) {
   if (Platform.OS === 'web') {
-    throw new Error('Abra o Entrelinhas no celular para salvar o PDF.');
+    if (!podeSalvar()) return;
+
+    const quadro = document.createElement('iframe');
+    quadro.style.display = 'none';
+    quadro.srcdoc = html;
+
+    await new Promise((resolver) => {
+      quadro.addEventListener('load', resolver, { once: true });
+      document.body.appendChild(quadro);
+    });
+
+    if (!podeSalvar()) {
+      quadro.remove();
+      return;
+    }
+
+    try {
+      const pagina = quadro.contentWindow;
+      pagina.addEventListener('afterprint', () => quadro.remove(), { once: true });
+      pagina.print();
+    } catch (erro) {
+      quadro.remove();
+      throw erro;
+    }
+
+    return;
   }
 
   if (!podeSalvar()) return;
@@ -102,12 +127,12 @@ export async function salvarRelatorioPdf({ html, nomeArquivo, podeSalvar, imprim
       try {
         destino = await StorageAccessFramework.createFileAsync(pasta, nomeArquivo, 'application/pdf');
         if (!podeSalvar()) {
-          await deleteAsync(destino, { idempotent: true }).catch(() => {});
+          await deleteAsync(destino, { idempotent: true }).catch(() => { });
           return;
         }
         await StorageAccessFramework.writeAsStringAsync(destino, pdf.base64, { encoding: EncodingType.Base64 });
       } catch (erro) {
-        if (destino) await deleteAsync(destino, { idempotent: true }).catch(() => {});
+        if (destino) await deleteAsync(destino, { idempotent: true }).catch(() => { });
         throw erroAoSalvarNaPasta(erro);
       }
 
@@ -116,6 +141,6 @@ export async function salvarRelatorioPdf({ html, nomeArquivo, podeSalvar, imprim
 
     await Sharing.shareAsync(pdf.uri, { mimeType: 'application/pdf', UTI: 'com.adobe.pdf' });
   } finally {
-    await deleteAsync(pdf.uri, { idempotent: true }).catch(() => {});
+    await deleteAsync(pdf.uri, { idempotent: true }).catch(() => { });
   }
 }

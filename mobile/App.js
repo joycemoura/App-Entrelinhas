@@ -7,6 +7,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
+import { useFonts } from 'expo-font';
 
 import { Fragment } from 'react';
 import { KeyboardProvider } from 'react-native-keyboard-controller';
@@ -153,6 +154,12 @@ function Navegacao({ pendencia, aceitarTermos, voltarDosTermos, salvandoTermos, 
 }
 
 export default function App() {
+  const caminhoSite = process.env.EXPO_BASE_URL;
+  const fonteIcones = Platform.OS === 'web' && caminhoSite
+    ? { [Object.keys(Ionicons.font)[0]]: `${caminhoSite}/fonts/Ionicons.ttf` }
+    : Ionicons.font;
+
+  const [iconesCarregados, erroIcones] = useFonts(fonteIcones);
   const [sessao, setSessao] = useState(null);
   const [pendencia, setPendencia] = useState(null);
   const [salvandoTermos, setSalvandoTermos] = useState(false);
@@ -219,6 +226,10 @@ export default function App() {
       assinatura.remove();
     };
   }, [sessao, sair]);
+
+  if (!iconesCarregados && !erroIcones) {
+    return <ActivityIndicator style={{ flex: 1 }} />;
+  }
 
   return (
     <SafeAreaProvider>

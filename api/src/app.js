@@ -10,7 +10,8 @@ const app = express();
 app.disable('x-powered-by');
 app.use(cors({
   origin: [
-    'https://app-entrelinhas-mobile.vercel.app'
+    'http://localhost:8081',
+    'https://joycemoura.github.io',
   ],
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
