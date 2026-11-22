@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 
 import statusRoutes from './routes/statusRoutes.js';
 import authRoutes from './routes/authRoutes.js';
@@ -7,6 +8,13 @@ import registrosHumorRoutes from './routes/registrosHumorRoutes.js';
 const app = express();
 
 app.disable('x-powered-by');
+app.use(cors({
+  origin: [
+    'https://app-entrelinhas-mobile.vercel.app'
+  ],
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 app.use(express.json({ limit: '16kb' }));
 
