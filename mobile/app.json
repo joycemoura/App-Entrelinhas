@@ -13,6 +13,7 @@
       "baseUrl": "/App-Entrelinhas"
     },
     "android": {
+      "package": "com.joyceeeira.entrelinhas",
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
         "foregroundImage": "./assets/android-icon-foreground.png",
@@ -27,6 +28,11 @@
       "expo-status-bar",
       "expo-sharing",
       "expo-font"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "0df93859-4184-423d-b1a4-5d4e60d3b537"
+      }
+    }
   }
 }

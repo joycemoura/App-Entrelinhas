@@ -21,7 +21,7 @@ const secoes = [
   },
   {
     titulo: 'Suas escolhas',
-    texto: 'No Calendário, você pode consultar e apagar seus registros. Em Privacidade e dados, você pode exportar seus dados em PDF. O aceite e as preferências ficam no aparelho. Na conversa com IA, a pergunta digitada é enviada à API do Entrelinhas e ao Gemini. Use exemplos fictícios e guarde as anotações pessoais no diário. As mensagens ficam na memória da sessão do app.',
+    texto: 'No Calendário, você pode consultar e apagar seus registros. Em Privacidade e dados, você pode exportar seus dados em PDF. O aceite e as preferências ficam no aparelho. Na conversa com IA, a pergunta digitada é enviada à API do Entrelinhas e ao Gemini. Guarde as anotações pessoais no diário. As mensagens ficam na memória da sessão do app.',
   },
 ];
 

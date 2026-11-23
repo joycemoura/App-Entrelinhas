@@ -46,8 +46,7 @@ export default function ConversaScreen({ route, navigation }) {
   return (
     <Tela
       titulo="Conversa com IA"
-      descricao="Faça uma pergunta sobre os documentos de referência."
-      menu={false}
+      descricao="Pergunte sobre bem-estar, estresse, alimentação ou atividade física. As respostas são baseadas nos guias do Entrelinhas." menu={false}
       voltar={() => navigation.goBack()}
       teclado
       scrollRef={rolagem}
@@ -69,7 +68,7 @@ export default function ConversaScreen({ route, navigation }) {
       ))}
 
       <CampoTexto rotulo="Sua pergunta" value={texto} onChangeText={setTexto} maxLength={500} editable={!enviando} multiline
-        ajuda="A pergunta é enviada ao Gemini. Use exemplos fictícios e deixe dados pessoais ou de saúde fora da conversa." />
+        ajuda="A pergunta é enviada ao Gemini. Evite incluir dados pessoais ou informações sobre sua saúde." />
       {Boolean(erro) && <Aviso erro>{erro}</Aviso>}
       <Botao titulo={enviando ? 'Consultando documentos...' : 'Enviar'} onPress={enviar}
         desabilitado={enviando || texto.trim().length < 3} />
