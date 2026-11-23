@@ -1,118 +1,102 @@
 # Entrelinhas
 
-O **Entrelinhas** é um aplicativo de registro de humor desenvolvido como trabalho final da disciplina de Desenvolvimento de Aplicações para Dispositivos Móveis da Universidade Federal do Paraná (UFPR).
+O Entrelinhas é um diário de humor desenvolvido para o Trabalho Final de Desenvolvimento de Aplicações para Dispositivos Móveis. O app permite registrar humores, acompanhar o histórico no calendário, exportar um relatório em PDF e conversar com uma IA que consulta materiais de referência.
 
-O aplicativo permite registrar emoções, acompanhar o histórico de humor e consultar materiais informativos sobre saúde mental por meio de uma conversa com inteligência artificial.
+## Escolha como testar
 
-## Funcionalidades
+| Forma de execução | Use quando quiser |
+| --- | --- |
+| [Instalar o APK](#1-instalar-o-apk-no-android) | Testar a versão publicada em um celular Android |
+| [Abrir pelo Expo com as APIs publicadas](#2-abrir-pelo-expo-com-as-apis-publicadas) | Executar o projeto baixado usando os serviços da equipe |
+| [Executar as APIs localmente](#3-executar-o-app-e-as-apis-localmente) | Reproduzir o ambiente e iniciar os serviços no próprio computador |
 
-- Cadastro e login de usuários.
-- Registro diário de humor.
-- Edição e exclusão de registros.
-- Calendário com histórico de emoções.
-- Estatísticas mensais de humor.
-- Personalização de avatar, tema e preferências.
-- Lembretes e opções de acessibilidade.
-- Conversa com IA integrada ao Gemini.
-- Consulta a materiais informativos em PDF.
-- Exportação dos registros em PDF.
-- Gerenciamento e exclusão da conta.
+Os comandos de instalação e inicialização estão na **seção 4 do arquivo Entrelinhas_Documentacao.docx**, que acompanha a entrega.
 
-## Tecnologias utilizadas
+## 1. Instalar o APK no Android
 
-**Aplicativo**
-- React Native
-- Expo
-- JavaScript
-- React Navigation
+1. Abra a [página de releases do Entrelinhas](https://github.com/joycemoura/App-Entrelinhas/releases) no navegador do celular.
+2. Abra a versão publicada e procure a seção **Assets**, no fim da página da versão.
+3. Toque no arquivo que termina em **.apk** e aguarde o download.
+4. Abra o arquivo em **Downloads** e toque em **Instalar**. Se o Android pedir permissão para instalar pela origem usada no download, siga o aviso do sistema.
+5. Abra o **Entrelinhas** no menu de aplicativos. Crie uma conta fictícia, aceite os termos quando aparecerem e faça login.
+6. Siga o [roteiro de teste](#roteiro-de-teste) para conferir as funcionalidades.
 
-**Backend**
-- Node.js
-- Express
-- PostgreSQL
-- JWT
+O APK já está configurado para usar as APIs publicadas pela equipe. Mantenha o celular conectado à internet durante o teste.
 
-**Inteligência artificial**
-- Google Gemini
-- Gemini File Search
-- API hospedada na Vercel
+## 2. Abrir pelo Expo com as APIs publicadas
 
-## Estrutura do projeto
+### Baixar e abrir o projeto
 
-O projeto está dividido em três pastas principais:
+1. Instale o **Node.js 22 ou 24** no computador. Para testar no Android, instale também o **Expo Go** no celular.
+2. Abra o [repositório do Entrelinhas](https://github.com/joycemoura/App-Entrelinhas). Clone o projeto com Git ou use **Code → Download ZIP** e extraia o conteúdo.
+3. Abra o projeto no VS Code. A pasta correta é aquela que contém **api**, **api-ia** e **mobile**.
 
-- `mobile/` — aplicativo desenvolvido com React Native e Expo.
-- `api/` — backend responsável pela autenticação e armazenamento dos registros no PostgreSQL.
-- `api-ia/` — integração com o Gemini e consulta aos documentos de referência.
+### Configurar os serviços publicados
 
-## Como executar o projeto
+1. Dentro de **mobile**, abra ou crie o arquivo **.env**.
+2. Nesse arquivo, preencha a configuração **EXPO_PUBLIC_API_URL** com o endereço da **API de dados** da tabela abaixo.
+3. Abra **mobile/src/services/iagen.js** e confira se o endereço publicado é o da **API de IA** da tabela.
 
-### 1. Clonar o repositório
+| Serviço | Endereço para configurar | Página de verificação |
+| --- | --- | --- |
+| API de dados | [https://app-entrelinhas.vercel.app](https://app-entrelinhas.vercel.app) | [Verificar API de dados](https://app-entrelinhas.vercel.app/health) |
+| API de IA | [https://api-ia-ten.vercel.app](https://api-ia-ten.vercel.app) | [Verificar API de IA](https://api-ia-ten.vercel.app/saude) |
 
-```bash
-git clone https://github.com/joycemoura/App-Entrelinhas.git
-cd App-Entrelinhas
-```
+### Abrir o aplicativo
 
-### 2. Configurar o backend
+1. Siga a **seção 4.2 da documentação técnica** para instalar as dependências da pasta **mobile** e iniciar o Expo.
+2. Para testar no **Android**, conecte o celular e o computador à mesma rede Wi-Fi. Abra o Expo Go e escaneie o QR Code exibido pelo Expo.
+3. Para testar no **computador**, pressione **W** na tela em que o Expo está rodando. O app abrirá no navegador.
+4. Quando aparecer a tela inicial do Entrelinhas, siga o [roteiro de teste](#roteiro-de-teste). Se o app apresentar erro de conexão, abra as páginas de verificação da tabela e confira os endereços configurados. Reinicie o Expo depois de alterar o arquivo **.env**.
 
-Configure o PostgreSQL e as variáveis de ambiente no arquivo `api/.env`.
+Nesse modo, o app usa o banco de dados e a base de PDFs já preparados pela equipe.
 
-Depois execute:
+## 3. Executar o app e as APIs localmente
 
-```bash
-cd api
-npm install
-npm run db:init
-node --watch src/server.js
-```
+### Colocar os arquivos de configuração no lugar
 
-A API será executada na porta `3000`.
+1. Abra a pasta do repositório baixado.
+2. Extraia o **ZIP privado entregue na UFPR Virtual**.
+3. Copie cada arquivo para o destino abaixo. As três pastas têm um arquivo com o mesmo nome, **.env**.
 
-### 3. Executar o aplicativo
+| Arquivo no ZIP | Onde colocar no projeto | O que configura |
+| --- | --- | --- |
+| **api/.env** | Pasta **api** | Conexão com o PostgreSQL e autenticação |
+| **api-ia/.env** | Pasta **api-ia** | Chave do Gemini e identificação da base de PDFs |
+| **mobile/.env** | Pasta **mobile** | Endereço da API de dados utilizada pelo aplicativo |
 
-Configure o endereço da API no arquivo `mobile/.env`.
+Mantenha as credenciais no ZIP privado e nos arquivos de configuração locais.
 
-Em outro terminal, execute:
+### Preparar o banco e iniciar a API de dados
 
-```bash
-cd mobile
-npm install
-npx expo start
-```
+1. Abra **api/.env**. Se o arquivo aponta para um banco de avaliação já preparado, mantenha a configuração recebida.
+2. Se for usar um **PostgreSQL local vazio**, inicie o PostgreSQL, crie o banco **App-Entrelinhas** e coloque no arquivo **api/.env** o nome do banco, o usuário e a senha da sua instalação. A **seção 4.3 da documentação técnica** mostra como criar as tabelas.
+3. Instale as dependências da pasta **api** e inicie a API de dados conforme a **seção 4.3**.
+4. Abra a [página de verificação da API de dados local](http://localhost:3000/health). A página deve retornar uma resposta antes de você seguir para a próxima etapa.
 
-Abra o aplicativo utilizando o Expo Go no celular.
+### Iniciar a API de IA
 
-### 4. Configurar a inteligência artificial
+1. Confira se o arquivo **api-ia/.env** está na pasta certa e contém a chave do Gemini e o identificador da base de PDFs.
+2. Instale as dependências da pasta **api-ia** e inicie o serviço conforme a **seção 4.4 da documentação técnica**.
+3. Abra a [página de verificação da API de IA local](http://localhost:3001/saude). Confira se **chaveConfigurada** e **baseConfigurada** aparecem como **true**.
+4. Se o ZIP aponta para a base já indexada, pode seguir para a abertura do app. Se estiver usando uma base nova, siga a etapa de importação dos PDFs na **seção 4.4**.
 
-A integração com IA está localizada na pasta `api-ia/`.
+### Conectar o aplicativo às APIs locais
 
-Para executar localmente:
+1. Em **mobile/.env**, configure **EXPO_PUBLIC_API_URL** conforme o dispositivo de teste.
 
-```bash
-cd api-ia
-npm install
-npm run dev
-```
+   | Onde o app vai abrir | Endereço da API de dados |
+   | --- | --- |
+   | Navegador no computador que executa as APIs | **http://localhost:3000** |
+   | Celular Android conectado à mesma rede | Endereço **IPv4 do computador**, por HTTP, na porta **3000** |
 
-É necessário configurar a chave do Gemini e a base de documentos no arquivo `api-ia/.env`.
+2. Em **mobile/src/services/iagen.js**, deixe o campo **enderecoPublicado** vazio. O app usará a API de IA no mesmo computador da API de dados, pela porta **3001**.
+3. Inicie o Expo na pasta **mobile** conforme a **seção 4.5**. Se o Expo já estava aberto antes das alterações, reinicie-o.
+4. Pressione **W** para abrir no navegador ou escaneie o QR Code no Expo Go. Para testar no celular, mantenha-o na mesma rede Wi-Fi do computador.
 
-A API de IA também está publicada na Vercel:
+## Roteiro de teste
 
-https://api-ia-ten.vercel.app/saude
-
-## Documentos de referência
-
-A inteligência artificial utiliza o Gemini File Search para consultar materiais sobre emoções, sono, autocuidado e saúde mental.
-
-Os documentos estão organizados na pasta `api-ia/documentos/`, juntamente com as instruções de importação e indexação.
-
-## Documentação
-
-A documentação completa do projeto apresenta a arquitetura, as decisões de desenvolvimento, as funcionalidades, os requisitos de segurança e as recomendações do Guia TrackWell utilizadas na construção das interfaces.
-
-Consulte o arquivo `ENTRELINHAS_DOCUMENTACAO.md` para mais detalhes.
-
-## Projeto acadêmico
-
-Desenvolvido para a disciplina de **Desenvolvimento de Aplicações para Dispositivos Móveis**.
+1. **Cadastro e login.** Crie uma conta fictícia, aceite os termos quando aparecerem e faça login.
+2. **Diário.** Registre um humor, abra o calendário e localize o registro. Edite-o e confira se a alteração foi salva.
+3. **Conversa com IA.** Pergunte “Segundo o Guia Alimentar, por que priorizar alimentos in natura ou minimamente processados?” e confira se a resposta indica a fonte.
+4. **Relatório.** Abra a área de privacidade e dados, exporte o relatório em PDF e confira se ele contém os dados da conta de teste.
