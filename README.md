@@ -10,7 +10,7 @@ O Entrelinhas é um diário de humor desenvolvido para o Trabalho Final de Desen
 | [Abrir pelo Expo com as APIs publicadas](#2-abrir-pelo-expo-com-as-apis-publicadas) | Executar o projeto baixado usando os serviços da equipe |
 | [Executar as APIs localmente](#3-executar-o-app-e-as-apis-localmente) | Reproduzir o ambiente e iniciar os serviços no próprio computador |
 
-Os comandos de instalação e inicialização estão na **seção 4 do arquivo Entrelinhas_Documentacao.docx**, que acompanha a entrega.
+Os comandos de instalação e inicialização estão na **seção 4 do arquivo Documentacao-app.pdf**, que acompanha a entrega.
 
 ## 1. Instalar o APK no Android
 
